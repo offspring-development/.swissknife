@@ -13,9 +13,11 @@ Plugin 'ap/vim-css-color'
 Plugin 'digitaltoad/vim-jade'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'editorconfig/editorconfig-vim'
+Plugin 'floobits/floobits-neovim'
 Plugin 'groenewege/vim-less'
 Plugin 'itchyny/lightline.vim'
 Plugin 'jiangmiao/auto-pairs'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'mattn/emmet-vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'scrooloose/nerdtree'
@@ -23,14 +25,15 @@ Plugin 'sjl/gundo.vim'
 Plugin 'tmhedberg/matchit'
 Plugin 'tommcdo/vim-exchange'
 Plugin 'tpope/vim-haml'
-Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-surround'
 Plugin 'Yggdroot/indentLine'
 
 call vundle#end()
+
+" basic
 filetype plugin indent on
 syntax on
-
 set lazyredraw
 
 " theme and color
@@ -41,6 +44,7 @@ colorscheme koehler
 " numbering and rulers
 set relativenumber
 set number
+set cursorline
 set colorcolumn=80
 highlight ColorColumn ctermbg=7
 
@@ -48,10 +52,29 @@ highlight ColorColumn ctermbg=7
 set backspace=indent,eol,start
 set mouse=
 
+" new window or pane should be appended to bottom right
+set splitbelow
+set splitright
+
+" handy mapping
+set pastetoggle=<leader>p
+nnoremap ; :
+nnoremap j gj
+nnoremap k gk
+
+if bufwinnr(1)
+  " pane resize vertically = -
+  " and horizontally + _
+  map = 5<c-w>>
+  map - 5<c-w><
+  map + 5<c-w>+
+  map _ 5<c-w>-
+endif
+
 " tab stops
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
 set expandtab
 
 " searching
@@ -60,10 +83,38 @@ set hlsearch
 set modifiable
 set smartcase
 set ignorecase
+map <space> :noh<cr>
 
-" hidden chars
+" show hidden chars
 set listchars=tab:>-,trail:.
 set list
+
+" text format
+set wrap
+set showmatch
+
+" disable swap files
+set nobackup
+set nowritebackup
+set noswapfile
+
+" large file handle
+let g:LargeFile = 10 * 1024 * 1024
+augroup LargeFile
+  autocmd BufReadPre * let f=getfsize(expand("<afile>")) | if f > g:LargeFile || f == -2 | call LargeFile() | endif
+augroup END
+function! LargeFile()
+  set eventignore+=FileType " disable filetype related features
+  noswapfile
+  setlocal bufhidden=unload " save memory when other file is viewed
+  setlocal buftype=nowrite
+  setlocal undolevels=1
+  autocmd VimEnter *  echo "Entering large-file-mode as file is larger than " . (g:LargeFile / 1024 / 1024) . "MB"
+endfunction
+
+" sudo switch with w!!
+cmap w!! w !sudo tee % >/dev/null
+
 
 " neovim
 if has('nvim')
@@ -89,11 +140,13 @@ endif
 
 
 " Emmet
+" @see https://github.com/mattn/emmet-vim
 "   tab to expand
 imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 
 
 " Exchange
+" @see https://github.com/tommcdo/vim-exchange
 let g:exchange_no_mappings=1
 nmap cx <Plug>(Exchange)
 vmap X <Plug>(Exchange)
@@ -101,19 +154,30 @@ nmap cxc <Plug>(ExchangeClear)
 nmap cxx <Plug>(ExchangeLine)
 
 
+" Ctrlp
+" @see https://github.com/ctrlpvim/ctrlp.vim
+let g:ctrlp_max_files = 0
+let g:ctrlp_working_path_mode = 0
+set wildignore+=*/vendors/**
+set wildignore+=*/node_modules/**
+set wildignore+=*/bower_components/**
+
 " Gundo
+" @see https://github.com/sjl/gundo.vim
 let g:gundo_right=1
 let g:gundo_close_on_revert = 1
 let g:gundo_preview_height=25
-nnoremap <F5> :GundoToggle<CR>
+nnoremap <leader>u :GundoToggle<cr>
 
 
 " Indent line
+" @see https://github.com/Yggdroot/indentLine
 let g:indentLine_color_term = 239
 let g:indentLine_char = '┆'
 
 
 " Light line
+" @see https://github.com/itchyny/lightline.vim
 set laststatus=2
 let g:lightline = {
 \ 'colorscheme': 'wombat',
@@ -167,6 +231,7 @@ endfunction
 
 
 " Nerdtree
+" @see https://github.com/scrooloose/nerdtree
 "   Ctrl + N to toggle
 "   and show-on folder open
 autocmd StdinReadPre * let s:std_in=1
@@ -174,7 +239,7 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 map <C-n> :NERDTreeToggle<CR>
 
 
-"--------------------------------- PLUGIN -------------------------------------"
+"--------------------------------- EXTRA -------------------------------------"
 
 
 " Load local vimrc, if any
