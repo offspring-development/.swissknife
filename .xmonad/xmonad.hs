@@ -84,8 +84,8 @@ main = do
     , ("M-S-l", sendMessage MirrorShrink)
 
     -- volume control, via `pactl`
-    , ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume 0 +1%")
-    , ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume 0 -1%")
+    , ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume 0 +1.5%")
+    , ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume 0 -1.5%")
     , ("<XF86AudioMute>", spawn "pactl set-sink-mute 0 toggle" )
     ]
 
