@@ -24,7 +24,6 @@ import XMonad.Util.EZConfig ( additionalKeysP, additionalMouseBindings )
 
 
 myModMask = mod4Mask
-myTerminal = "xfce4-terminal"
 myWorkspaces = [ "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
 -- application, for clustering
@@ -61,7 +60,6 @@ main = do
         >> updatePointer (Relative 0.5 0.5)
 
     , modMask = myModMask
-    , terminal = myTerminal
 
     , borderWidth = 1
     , normalBorderColor = myAccentColor
