@@ -59,8 +59,8 @@ set splitright
 " handy mapping
 set pastetoggle=<leader>p
 nnoremap ; :
-nnoremap j gj
-nnoremap k gk
+" nnoremap j gj
+" nnoremap k gk
 
 if bufwinnr(1)
   " pane resize vertically = -
