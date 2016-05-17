@@ -170,6 +170,10 @@ let g:gundo_preview_height=25
 nnoremap <leader>u :GundoToggle<cr>
 
 
+" Search selected text
+vnoremap # y/<C-R>"<CR>
+
+
 " Indent line
 " @see https://github.com/Yggdroot/indentLine
 let g:indentLine_color_term = 239
