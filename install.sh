@@ -19,7 +19,7 @@ ln -sf $DIR/.vimrc $HOME/;
 if [ ! -d "$HOME/.vim/bundle/Vundle.vim" ]; then
   git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim;
 fi
-vim +PluginInstall +qall
+nvim +PluginInstall +qall
 
 # neovim config linking
 if hash nvim 2>/dev/null; then
