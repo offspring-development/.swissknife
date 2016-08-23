@@ -9,3 +9,6 @@ git clone https://github.com/leminh111/.swissknife.git $HOME/.swissknife && $HOM
 ```
 
 If there's trouble opening nvim (error: NERDTREE not editor command) then install plugin by using Vundle => :VundleInstall
+
+TODO
+Upload .config/i3/config file
