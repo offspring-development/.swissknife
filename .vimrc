@@ -27,6 +27,7 @@ Plugin 'tpope/vim-haml'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'Yggdroot/indentLine'
+Plugin 'dkprice/vim-easygrep'
 
 call vundle#end()
 
