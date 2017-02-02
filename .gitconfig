@@ -15,7 +15,7 @@
   v = log --graph --all --format=\"%C(auto)%h%C(reset) %C(auto)%d%C(reset) %s %C(yellow)- %cn, %cd%C(reset)\" --date=relative
 
 [core]
-  editor = vim
+  editor = nvim
 
 [credential]
   helper = cache --timeout=3600

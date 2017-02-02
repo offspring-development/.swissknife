@@ -77,6 +77,9 @@ set softtabstop=2
 set shiftwidth=2
 set expandtab
 
+" for php files, 4 spaces
+autocmd Filetype php setlocal ts=4 sw=4 sts=0 expandtab
+
 " searching
 set showcmd
 set hlsearch
