@@ -79,7 +79,7 @@ bindsym $sup+Shift+Up move up
 bindsym $sup+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $sup+h split h
+bindsym $sup+o split h
 
 # split in vertical orientation
 bindsym $sup+v split v

@@ -2,17 +2,6 @@
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-# xmonad config
-if hash xmonad 2>/dev/null; then
-  echo -e "\n\033[32mConfiguring xmonad\033[m";
-  mkdir $HOME/.xmonad;
-  ln -sf $DIR/.xmonad/xmonad.hs $HOME/.xmonad/;
-  ln -sf $DIR/.xmonad/xmobar.hs $HOME/.xmonad/;
-  ln -sf $DIR/.xmonad/trayer-factory $HOME/.xmonad/;
-  ln -sf $DIR/.xmonad/feh-factory $HOME/.xmonad/;
-  ln -sf $DIR/.wallpaper $HOME/;
-fi
-
 # vim config
 echo -e "\n\033[32mConfiguring vim\033[m";
 ln -sf $DIR/.vimrc $HOME/;
